@@ -3,15 +3,16 @@ import { createPinia } from "pinia";
 import './assets/styles/main.scss'
 import App from './App.vue'
 import router from './router'
-import { auth } from './firebase'
+import { supabase } from './supabase'
 import { onAuthStateChanged } from 'firebase/auth'
 
 let app
-onAuthStateChanged(auth, () => {
+supabase.auth.getSession().then(({ data: { session } }) => {
     if (!app) {
         app = createApp(App)
-            .use(router)
             .use(createPinia())
+            .use(router)
             .mount('#app')
     }
 })
+
