@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, computed, watch } from "vue";
-import {useRouter} from "vue-router";
+import { ref } from "vue";
 import { useUserFiles } from '#/composables/useUserFiles'
 import { useStorageUpload } from '#/composables/useStorageUpload'
 import { useStorageDelete } from '#/composables/useStorageDelete'
@@ -9,7 +8,6 @@ export const useFileStore = defineStore("fileStore", () => {
     const files = ref([]);
     const loading = ref(false)
     const error = ref(null)
-    const router = useRouter()
 
     const { listFiles } = useUserFiles()
     const { uploadUserFile } = useStorageUpload()

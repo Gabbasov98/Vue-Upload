@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { auth } from '#/firebase'
 import { supabase } from '#/supabase'
 
 import Home from '#/components/pages/Home.vue'

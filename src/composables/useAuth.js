@@ -1,16 +1,4 @@
 import { ref, readonly, onMounted } from 'vue'
-import {
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
-    setPersistence,
-    browserLocalPersistence,
-    browserSessionPersistence
-} from 'firebase/auth'
-
-import { auth } from '@/firebase'
-
 import { supabase } from '@/supabase'
 
 const currentUser = ref(null)
