@@ -59,7 +59,7 @@
                         type="submit"
                         :disabled="isLoading"
                 >
-                    <span>Registration</span>
+                    <span>Sign Up</span>
                 </BaseButton>
                 <BaseButton
                         variant="primary-outline"

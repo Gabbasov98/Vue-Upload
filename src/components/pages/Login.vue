@@ -61,7 +61,7 @@
                         variant="primary-outline"
                         @click="router.push('/registration')"
                 >
-                    <span>Registration</span>
+                    <span>Sign Up</span>
                 </BaseButton>
             </div>
         </form>

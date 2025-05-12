@@ -20,6 +20,10 @@ export function useSupabaseError() {
             return 'Network error. Please try again later.'
         }
 
+        if (message.includes('email not confirmed')) {
+            return 'Email not confirmed.'
+        }
+
         return 'An unexpected error occurred. Please try again.'
     }
 
