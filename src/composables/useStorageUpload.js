@@ -1,8 +1,11 @@
 import { supabase } from '#/supabase'
 import { useUserStore } from '#/stores/useUserStore'
+import { useTranslitera } from '#/composables/useTranslitera'
 
 export function useStorageUpload() {
     async function uploadUserFile(file) {
+        const translitera = useTranslitera()
+
         if (!file || !(file instanceof File)) {
             throw new Error('No file selected or invalid file')
         }
@@ -12,11 +15,13 @@ export function useStorageUpload() {
 
         if (!user) throw new Error('Not logged in')
 
-        const filePath = `${user.id}/${Date.now()}_${file.name}`
+        const renamedFile = new File([file], translitera.getTranlitedWord(file.name).replace(/\s/g, ""));
+        const filePath = `${user.id}/${Date.now()}_${renamedFile.name}`
+
 
         const { error } = await supabase.storage
             .from('user-files')
-            .upload(filePath, file)
+            .upload(filePath, renamedFile)
 
         if (error) throw error
 
