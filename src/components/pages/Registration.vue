@@ -129,7 +129,7 @@
             await register(form.email, form.password)
             router.push('/') // или куда тебе нужно
         } catch (err) {
-            error.value = getErrorMessage(err)
+            error.value = err
         }
     }
 

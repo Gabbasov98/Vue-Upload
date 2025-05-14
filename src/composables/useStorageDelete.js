@@ -1,10 +1,12 @@
 import { supabase } from '#/supabase'
+import { useUserStore } from '#/stores/useUserStore'
 
 export function useStorageDelete() {
     async function deleteFileFromStorage(fileName) {
-        const { data: { user }, error: userError } = await supabase.auth.getUser()
+        const userStore = useUserStore();
+        const user = await userStore.fetchUser()
 
-        if (!user) throw new Error('User not authenticated')
+        if (!user) throw new Error('Not logged in')
 
         const filePath = `${user.id}/${fileName}`
 

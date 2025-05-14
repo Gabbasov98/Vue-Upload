@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { supabase } from '#/supabase'
+import { useUserStore } from '#/stores/useUserStore'
 
 import Home from '#/components/pages/Home.vue'
 import Files from '#/components/pages/Files.vue'
@@ -34,7 +35,8 @@ router.beforeEach(async (to, from, next) => {
 
     if (!requiresAuth) return next()
 
-    const { data: { user } } = await supabase.auth.getUser()
+    const userStore = useUserStore();
+    const user = await userStore.fetchUser()
 
     if (!user) {
         next('/login')

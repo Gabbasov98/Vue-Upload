@@ -1,10 +1,13 @@
 import { supabase } from '@/supabase'
+import { useUserStore } from '#/stores/useUserStore'
 
 export function useUserFiles() {
 
     async function listFiles() {
-        const { data: { user }, error: userError } = await supabase.auth.getUser()
-        if (userError || !user) throw new Error('Not logged in')
+        const userStore = useUserStore();
+        const user = await userStore.fetchUser()
+
+        if (!user) throw new Error('Not logged in')
 
         const folderPath = `${user.id}/`
 

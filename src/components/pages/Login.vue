@@ -118,7 +118,7 @@
             router.push('/')
         } catch (err) {
             // error.value = err.message
-            error.value = getErrorMessage(err)
+            error.value = err
         }
     }
 </script>

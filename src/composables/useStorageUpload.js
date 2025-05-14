@@ -1,4 +1,5 @@
 import { supabase } from '#/supabase'
+import { useUserStore } from '#/stores/useUserStore'
 
 export function useStorageUpload() {
     async function uploadUserFile(file) {
@@ -6,8 +7,10 @@ export function useStorageUpload() {
             throw new Error('No file selected or invalid file')
         }
 
-        const { data: { user }, error: userError } = await supabase.auth.getUser()
-        if (userError || !user) throw new Error('Not logged in')
+        const userStore = useUserStore();
+        const user = await userStore.fetchUser()
+
+        if (!user) throw new Error('Not logged in')
 
         const filePath = `${user.id}/${Date.now()}_${file.name}`
 
