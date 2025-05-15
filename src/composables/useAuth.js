@@ -10,7 +10,7 @@ onMounted(async() => {
     isLoading.value = false
 
     const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
-        currentUser.value = session ? .user || null
+        currentUser.value = session?.user || null
     })
 
     onUnmounted(() => {
