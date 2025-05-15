@@ -30,7 +30,7 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
     const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
     if (!requiresAuth) return next()

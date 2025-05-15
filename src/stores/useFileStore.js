@@ -13,6 +13,8 @@ export const useFileStore = defineStore("fileStore", () => {
     const { uploadUserFile } = useStorageUpload()
     const { deleteFileFromStorage } = useStorageDelete()
 
+
+
     async function loadFiles() {
         loading.value = true
         error.value = null
@@ -30,7 +32,9 @@ export const useFileStore = defineStore("fileStore", () => {
         try {
             error.value = null
             await uploadUserFile(file)
-            await loadFiles()
+            files.value = [file, ...files.value]
+            console.log(files.value)
+                // await loadFiles()
         } catch (e) {
             error.value = e.message
         }
@@ -60,20 +64,3 @@ export const useFileStore = defineStore("fileStore", () => {
         deleteFile
     }
 });
-
-
-async function getFiles() {
-    let files = []
-    let error = ''
-
-    try {
-        files = await listFiles()
-    } catch (e) {
-        error = e.message
-    }
-
-    return {
-        files,
-        error
-    }
-}

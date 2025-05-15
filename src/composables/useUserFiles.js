@@ -1,4 +1,4 @@
-import { supabase } from '@/supabase'
+import { supabase } from '#/supabase'
 import { useUserStore } from '#/stores/useUserStore'
 
 export function useUserFiles() {
@@ -24,7 +24,7 @@ export function useUserFiles() {
 
         // получить ссылки
         const files = await Promise.all(
-            data.map(async (item) => {
+            data.map(async(item) => {
                 const path = folderPath + item.name
                 const { data: { publicUrl } } = supabase.storage.from('user-files').getPublicUrl(path)
                 return {

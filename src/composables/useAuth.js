@@ -1,16 +1,16 @@
 import { ref, readonly, onMounted } from 'vue'
-import { supabase } from '@/supabase'
+import { supabase } from '#/supabase'
 
 const currentUser = ref(null)
 const isLoading = ref(false)
 
-onMounted(async () => {
+onMounted(async() => {
     const { data: { user } } = await supabase.auth.getUser()
     currentUser.value = user
     isLoading.value = false
 
     const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
-        currentUser.value = session?.user || null
+        currentUser.value = session ? .user || null
     })
 
     onUnmounted(() => {
@@ -65,5 +65,3 @@ export function useAuth() {
         logout
     }
 }
-
-
